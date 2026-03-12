@@ -7,6 +7,11 @@ This repository documents my Windows Server 2022 Active Directory and Group Poli
 - Role: Windows Server 2022 domain controller, member servers, and Windows/Fedora clients
 - Goal: Practice OU design, user/group management, Group Policy, security baselines, and auditing in a realistic small-business environment.
 
+## Architecture & Domain Topology 
+<p align="center">
+  <img src="images/Domain_Topology_myITlab.local.png" alt="Diagram showing the physical and logical Active Directory architecture of myITlab.local" width="85%">
+</p>
+
 ## What I Practiced
 
 - Designed an OU structure for departments (IT, HR, Sales, etc.) and computers (servers, Windows, Linux).  

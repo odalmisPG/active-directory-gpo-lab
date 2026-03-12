@@ -12,6 +12,12 @@ This document details the core Group Policies implemented in the `myITlab.local`
     *   Configured Account Lockout Policy (e.g., locking accounts after a set number of failed attempts).
 *   **Why it matters:** Ensures that every single user, regardless of their department OU, is held to a minimum cryptographic standard.
 
+<p align="center">
+  <img src="../images/Default_Domain_Policy-GPO.jpg" alt="Group Policy Management HTML report showing Default Domain Policy settings for 14-character minimum password length and 5-attempt account lockout threshold" width="90%">
+  <br>
+  <em>Evidence: GPO Report validating the password and account lockout configurations.</em>
+</p>
+
 ---
 
 ## 2. Advanced Audit Policy (Security Monitoring)

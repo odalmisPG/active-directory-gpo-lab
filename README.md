@@ -9,7 +9,7 @@ This repository documents my Windows Server 2022 Active Directory and Group Poli
 
 ## Architecture & Domain Topology 
 <p align="center">
-  <img src="images/Domain_Topology_myITlab.local.png" alt="Diagram showing the physical and logical Active Directory architecture of myITlab.local" width="85%">
+  <img src="images/Domain_Topology_myITlab.local.PNG" alt="Diagram showing the physical and logical Active Directory architecture of myITlab.local" width="85%">
 </p>
 
 ## What I Practiced

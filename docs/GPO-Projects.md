@@ -98,10 +98,16 @@ This document details the core Group Policies implemented in the `myITlab.local`
     *   Standardized Microsoft Edge startup pages and created a desktop shortcut for the "myITlab Portal".
 *   **Why it matters:** Demonstrates practical sysadmin skills related to daily user productivity, file server access control, and the use of Group Policy Preferences (GPP) over legacy logon scripts.
 
-<div align="center">
-  <img src="../images/Drive-Maps-IT-GPO.png" alt="Group Policy Management Editor showing mapped I: drive for the IT department using Group Policy Preferences" width="45%">
-  &nbsp;&nbsp;
-  <img src="../images/Edge-Browser-GPO.png" alt="Group Policy HTML report showing Microsoft Edge startup page configurations" width="45%">
+<p align="center">
+  <img src="../images/Drive-Maps-IT-GPO.png" alt="Group Policy Management Editor showing mapped I: drive for the IT department using Group Policy Preferences" width="90%">
   <br>
-  <em>Evidence: (Left) Example of GPP Drive mapping for the IT department. (Right) Standardized Edge browser configuration.</em>
-</div>
+     <em>Evidence: Example of GPP Drive mapping for the IT department.</em>
+   <br>
+   <br>
+  <img src="../images/WIndows10_Browser_Settings_Edge-GPO.png" alt="Group Policy HTML report showing Microsoft Edge startup page configurations" width="90%">
+  <br>
+  <em>Evidence: Standardized Edge browser configuration.</em>
+</p>
+
+
+

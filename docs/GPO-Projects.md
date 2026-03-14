@@ -34,6 +34,8 @@ This document details the core Group Policies implemented in the `myITlab.local`
   <br>
   <em>Evidence: Evidence: GPO Settings report showing advanced auditing configured to capture privileged events..</em>
 </p>
+
+
 ---
 
 ## 3. Windows 10 Security Baseline & PowerShell Logging
@@ -66,6 +68,8 @@ This document details the core Group Policies implemented in the `myITlab.local`
   <br>
   <em>Evidence: AD policy restricting local logon access, which is enforced via SSSD on the Linux endpoint</em>
 </p>
+
+
 ---
 
 ## 5. Service Account Hardening & Least Privilege

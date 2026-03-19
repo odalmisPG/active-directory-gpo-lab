@@ -78,8 +78,8 @@ The Fix: Identified that SSSD maps Windows GPO rights strictly. Remote SSH acces
 <br>
 
 ### ✅ Validation & Results
-The integration was successfully validated by logging into the Fedora workstation as the standard Active Directory user vanessa.hansen-wa@myitlab.local.
+The integration was successfully validated by logging into the Fedora workstation as the Active Directory user vanessa.hansen-wa@myitlab.local, who was granted restricted login access via GPO and mapped to local sudo privileges via the /etc/sudoers configuration.
 
 The screenshot below demonstrates the successful domain join (realm list) and verifies that the Linux system is successfully pulling the user's UID, GID, and Active Directory group memberships via SSSD (id).
 
-<div align="center"> <img src="../images/linux-ad-integration.png" alt="Linux AD Integration Success Screenshot" width="800"> <br> <i>Terminal output confirming domain status and successful AD user authentication.</i> </div> ```
+<div align="center"> <img src="../images/linux-ad-integration.png" alt="Linux AD Integration Success Screenshot" width="800"> <br> <i>Terminal output confirming domain status and successful AD user authentication.</i> </div> 

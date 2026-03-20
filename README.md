@@ -24,6 +24,7 @@ This repository documents my Windows Server 2022 Active Directory and Group Poli
 
 - [OU Design](docs/OU-Design.md)
 - [GPO Projects](docs/GPO-Projects.md)
+- [Linux Integration](docs/Linux-Integration.md)
 - [Auditing Evidence](docs/Auditing-Evidence.md)
 
 ## Screenshots

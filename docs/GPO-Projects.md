@@ -39,12 +39,12 @@ This document details the core Group Policies implemented in the `myITlab.local`
 ---
 
 ## 3. Windows 10 Security Baseline & PowerShell Logging
-**Goal:** Harden endpoint workstations and provide forensic visibility into script execution.
+**Goal:** Increase visibility into workstation security and script activity while strengthening endpoint protection.
 *   **Scope:** Linked to the `Workstations/Windows` OU.
 *   **Key Configurations Applied:**
-    *   **PowerShell Logging:** Enabled Module Logging and Script Block Logging.
-    *   **BitLocker & Credential Guard:** Configured via `MSFT Windows 10 22H2` policies to protect data at rest and prevent pass-the-hash attacks.
-    *   **Defender Antivirus:** Standardized scan schedules and definitions.
+    *   **PowerShell Logging:**  Module Logging and Script Block Logging enabled for better forensic insight.
+    *   **BitLocker & Credential Guard:** - Configured using MSFT Windows 10 22H2 policies to protect data at rest and reduce credential‑theft risks.
+    *   **Defender Antivirus:** Standardized scan schedules and definition updates.
     *   **Protocol Hardening:** Disabled legacy protocols like SMBv1 and hardened NTLM/LDAP.
 
 <p align="center">

@@ -1,12 +1,12 @@
 # Active Directory Security & Auditing Evidence
 
-This document outlines the Advanced Audit Policy configurations implemented in the `myITlab.local` environment and provides evidence of successful security event logging. Auditing was configured to track privileged account usage and critical group modifications, aligning with CIS and NIST cybersecurity frameworks.
+This document outlines the Advanced Audit Policy configurations implemented in the `myITlab.local` environment and provides evidence of successful security event logging. Auditing was configured to track privileged account activity and critical group modifications.
 
 ---
 
 ## 1. Privilege Escalation & Group Management (Event ID 4728)
 
-**Goal:** Monitor critical Active Directory groups (like Domain Admins or Server Admins) to detect unauthorized privilege escalation.
+**Goal:** Monitor critical Active Directory groups (Server Admins) to detect unauthorized privilege escalation.
 
 *   **Audit Policy Applied:** `Audit Security Group Management` (Success and Failure)
 *   **The Scenario:** A new admin account (`olivia.perez-sa`) was created following the principle of least privilege, and was added to the `GRP-Servers-Admin` global security group.

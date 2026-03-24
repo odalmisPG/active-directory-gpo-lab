@@ -43,7 +43,7 @@ This document details the core Group Policies implemented in the `myITlab.local`
 *   **Scope:** Linked to the `Workstations/Windows` OU.
 *   **Key Configurations Applied:**
     *   **PowerShell Logging:**  Module Logging and Script Block Logging enabled for better forensic insight.
-    *   **BitLocker & Credential Guard:** - Configured using MSFT Windows 10 22H2 policies to protect data at rest and reduce credential‑theft risks.
+    *   **BitLocker & Credential Guard:** - Configured using `MSFT Windows 10 22H2` policies to protect data at rest and reduce credential‑theft risks.
     *   **Defender Antivirus:** Standardized scan schedules and definition updates.
     *   **Protocol Hardening:** Disabled legacy protocols like SMBv1 and hardened NTLM/LDAP.
 

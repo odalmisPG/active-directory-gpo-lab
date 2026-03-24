@@ -36,33 +36,31 @@ sudo authselect enable-feature with-mkhomedir
 ### 3. Implementing GPO-Based Access Control
 Configured /etc/sssd/sssd.conf to respect Windows Group Policy by enforcing ad_gpo_access_control. Created a dedicated Active Directory security group (GRP-LinuxAdmins) and configured Windows GPO User Rights Assignment (Allow log on locally and Allow log on through Remote Desktop Services) to specifically permit the admin group while denying standard users.
 
-### 🛠️ Advanced Troubleshooting & Problem Solving
-During the integration, I encountered and successfully resolved several complex cross-platform authentication issues.
+## 🛠️ Advanced Troubleshooting & Problem Solving
 
-<details> <summary><b>🚨 1. Stale Kerberos SIDs & Cache Invalidation</b></summary> <br>
-The Problem: When an AD user was deleted and recreated, SSSD cached the old Security Identifier (SID), resulting in persistent "Access Denied" errors despite correct group assignments.
+During the integration, I encountered a complex cross-platform authentication block where valid AD users consistently received "Access Denied" errors upon login. Below is the workflow I used to diagnose and resolve the issue.
 
-The Fix: Diagnosed the caching failure and systematically purged the internal SSSD database, destroyed Kerberos tickets, and forced a fresh AD sync.
+<details>
+<summary><b>🚨 "Access Denied" Login Failure & GPO Parsing Remediation</b></summary>
+<br>
 
-```bash
-sudo systemctl stop sssd
-sudo rm -rf /var/lib/sss/db/* /var/lib/sss/mc/*
-sudo kdestroy -A
-sudo sss_cache -E
-sudo systemctl start sssd
-```
-</details> <details> <summary><b>🚨 2. Cross-Platform GPO Parsing Remediation</b></summary> <br>
-The Problem: Valid AD users began receiving default "Access Denied" messages. By enabling deep debug logging and analyzing SSSD trace logs (sssd_myitlab.local.log), I identified that a higher-level Service Account GPO contained Windows-specific .inf formatting that was crashing the Linux .ini text parser (iniconfigparse failed 5). When the parser fails, SSSD defaults to blocking all logins for security.
+**The Problem:** 
+An Active Directory user (`vanessa.hansen-wa@myitlab.local`) was placed in the correct `GRP-LinuxAdmins` security group and granted the "Allow log on locally" right via a Linux-specific GPO. However, the user was continuously rejected at the Fedora login screen with a default "Access Denied" message despite SSSD being correctly joined to the domain.
 
-The Fix: To fix the parser crash without modifying the parent Windows policy, I utilized Advanced Security Settings in AD Group Policy Management. I exposed hidden Computer objects in the directory picker and applied a strict Deny: Apply group policy rule for the Linux machine (GAN-WS-003$) on the incompatible GPO, restoring full authentication functionality.
+**The Diagnostic Process:**
+1. **Ruling out Stale Cache (SID Mismatch):** My initial hypothesis was that SSSD had cached an old Security Identifier (SID) because the AD user account had been recently deleted and recreated. To eliminate this variable, I stopped the SSSD service, systematically purged the internal SSSD database (`/var/lib/sss/db/*`), destroyed all Kerberos tickets (`kdestroy -A`), forced a fresh AD sync (`sss_cache -E`), and restarted the service. 
+2. **Deep Log Analysis:** When the cache clear did not resolve the issue, I redirected the SSSD GPO trace logs into a text file for deep analysis (`sudo grep -i "gpo" /var/log/sssd/sssd_myitlab.local.log > ~/gpo_results.txt`). 
 
-</details> <details> <summary><b>🚨 3. SSH GPO Permission Mapping</b></summary> <br>
-The Problem: Users granted the "Allow log on locally" right via GPO were still being rejected by SSSD when attempting to SSH into the machine.
+**The Root Cause:** 
+By analyzing the log output, I discovered the true cause. A higher-level Windows Service Account GPO (`ComputersDeny-ServiceAccount-Logon`) applied to the parent OU contained Windows-specific `.inf` formatting. When the Linux machine attempted to read this policy, it crashed the Linux `.ini` text parser (`iniconfigparse failed 5` / `Error 8 on line 1 Failed to read line`). When the SSSD GPO parser fails to read any policy, it "fails safe" and defaults to blocking all user logins.
 
-The Fix: Identified that SSSD maps Windows GPO rights strictly. Remote SSH access requires the Allow log on through Remote Desktop Services right in AD. Updated the GPO accordingly.
-
+**The Solution:** 
+To fix the parser crash without modifying the structure of the parent Windows policy, I utilized Advanced Security Settings in AD Group Policy Management. 
+1. In the AD directory picker, I exposed the hidden Computer objects.
+2. I added the Linux machine's computer object (`GAN-WS-003$`) to the Delegation list of the incompatible Service Account GPO.
+3. I applied a strict **Deny: Apply group policy** rule specifically for that Linux machine. 
+4. After running a final `sss_cache -E` on the Fedora machine, SSSD bypassed the crashing GPO, successfully parsed the Linux login GPO, and full authentication functionality was restored.
 </details>
-
 
 ## 💻 Common SSSD/Fedora Commands Used
 
